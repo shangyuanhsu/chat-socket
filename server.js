@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 const users = new Map(); //儲存 Socket id 對應到的使用者名稱
 
 //Step2:設定伺服器路由
-app.use(express.static('./'));
+app.use(express.static('./chat-example/'));
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
