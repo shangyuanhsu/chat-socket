@@ -1,7 +1,7 @@
 let userName = ""; //用於儲存使用者名稱
 
 //設定Socket連線的配置，配置內容為連線至本地端的port:3001，並關閉自動連線
-const socket = io("server-domain");
+const socket = io("https://server-domain.com/admin");
 
 function init() {
     //Step1:取得index.html中的元件
