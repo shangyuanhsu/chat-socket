@@ -10,10 +10,10 @@ const users = new Map(); //儲存 Socket id 對應到的使用者名稱
 //Step2:設定伺服器路由
 app.use(express.static('./'));
 
-app.get('/', function (req, res,next) {
+app.get('/', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
+
     res.sendFile(__dirname + '/index.html');
 });
 
