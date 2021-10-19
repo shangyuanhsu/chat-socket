@@ -6,7 +6,8 @@ const io = require('socket.io')(server, {
     // 處理跨域問題
     allowEIO3: true,
     cors: {
-        origin: "*"
+        origin: "*",
+        methods: ["GET", "POST"]
     }
 });
 
