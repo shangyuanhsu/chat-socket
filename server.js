@@ -4,11 +4,11 @@ const app = express();
 const server = require('http').Server(app);
 // const io = require('socket.io')(server);
 const io = require("socket.io")(httpServer, {
-    cors: {
-        origin: "https://shangyuanhsu.github.io/chat-example/",
-        methods: ["GET", "POST"]
+    allowRequest: (req, callback) => {
+      const noOriginHeader = req.headers.origin === undefined;
+      callback(null, noOriginHeader);
     }
-});
+  });
 const port = process.env.PORT || 3000;
 const users = new Map(); //儲存 Socket id 對應到的使用者名稱
 
