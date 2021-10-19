@@ -2,7 +2,11 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server , {
+    pingTimeout : 60000 ,
+    pingInterval : 25000 ,
+    cors : true ,
+});
 
 const port = process.env.PORT || 3000;
 const users = new Map(); //儲存 Socket id 對應到的使用者名稱
@@ -11,8 +15,6 @@ const users = new Map(); //儲存 Socket id 對應到的使用者名稱
 app.use(express.static('./'));
 
 app.get('/', function (req, res) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
     res.sendFile(__dirname + '/index.html');
 });
