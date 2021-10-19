@@ -74,14 +74,8 @@
 
     <script>
         // var socket = io("wss://socketio-server-testing.herokuapp.com/");
-        const io = require("socket.io")(httpServer, {
-            cors: {
-                origin: "https://shangyuanhsu.github.io/chat-example/",
-                methods: ["GET", "POST"]
-            }
-        });
         var socket = io("server-domain.com");
-
+      
 
         var messages = document.getElementById('messages');
         var form = document.getElementById('form');
