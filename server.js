@@ -2,10 +2,13 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server , {
-    pingTimeout : 60000 ,
-    pingInterval : 25000 ,
-    cors : true ,
+const io = require('socket.io')(server, {
+    // 處理跨域問題
+    allowEIO3: true,
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
 });
 
 const port = process.env.PORT || 3000;
