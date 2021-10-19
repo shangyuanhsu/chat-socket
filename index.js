@@ -6,8 +6,13 @@ const server = http.createServer(app);
 
 //socket
 const { Server } = require("socket.io");
-const io = new Server(server);
-
+// const io = new Server(server);
+const io = require("socket.io")(httpServer, {
+    cors: {
+      origin: "https://shangyuanhsu.github.io/chat-example/",
+      methods: ["GET", "POST"]
+    }
+  });
 app.get('/', (req, res) => {
     //   res.send('<h1>Hello world</h1>');
     res.sendFile(__dirname + '/index.html');
