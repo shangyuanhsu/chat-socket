@@ -73,7 +73,8 @@
         crossorigin="anonymous"></script>
 
     <script>
-        var socket = io("wss://socketio-server-testing.herokuapp.com/");
+        // var socket = io("wss://socketio-server-testing.herokuapp.com/");
+        var socket = io();
 
         var messages = document.getElementById('messages');
         var form = document.getElementById('form');
