@@ -67,11 +67,11 @@
         <input id="input" autocomplete="off" /><button>Send</button>
     </form>
     <!-- <script src="/socket.io/socket.io.js"></script> -->
-    
+
     <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
 
     <script>
-        var socket = io();
+        var socket = io("wss://socketio-server-testing.herokuapp.com/");
 
         var messages = document.getElementById('messages');
         var form = document.getElementById('form');
