@@ -7,7 +7,7 @@ const server = http.createServer(app);
 //socket
 const { Server } = require("socket.io");
 // const io = new Server(server);
-const io = require("socket.io")(Server, {
+const io = require("socket.io")(server, {
     cors: {
       origin: "https://shangyuanhsu.github.io/chat-example/",
       methods: ["GET", "POST"]
