@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const port = process.env.PORT || 3000;
 const users = new Map(); //儲存 Socket id 對應到的使用者名稱
 
 //Step2:設定伺服器路由
@@ -12,7 +13,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(3001, function () {
+server.listen(port, function () {
     console.log('Express https server listening on port 3001');
 });
 
