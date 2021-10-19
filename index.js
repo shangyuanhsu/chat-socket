@@ -1,7 +1,9 @@
 let userName = ""; //用於儲存使用者名稱
 
 //設定Socket連線的配置，配置內容為連線至本地端的port:3001，並關閉自動連線
-const socket = io("https://server-domain.com/admin");
+const socket = io(
+    'localhost:3001', { 'autoConnect': false }
+);
 
 function init() {
     //Step1:取得index.html中的元件
@@ -19,7 +21,7 @@ function init() {
     }
 
     //Step3:設定元件的監聽事件
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value && socket.connected) {
             socket.emit('message', userName, input.value); //發送message事件，以發送訊息
