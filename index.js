@@ -4,9 +4,7 @@ const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
 
 
-const socket = require("socket.io-client")("https://shangyuanhsu.github.io/chat-example/index.html", {
-  ca: fs.readFileSync('./cert.pem')
-});
+
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
