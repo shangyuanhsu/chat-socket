@@ -1,43 +1,41 @@
-//Step1:匯入套件與初始化變數
-const express = require('express');
-const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server, {
-    cors: {
-        origin: "*"
-    }
+var fs = require('fs')
+//https的一些設定
+var options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/awiclass.monoame.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/awiclass.monoame.com/fullchain.pem')
+}
+
+//https & socket port
+var https = require('https').createServer(options);
+https.listen(4040)
+var io = require('socket.io')(https);
+
+console.log("Server socket 4040 , api 4000")
+
+//api port
+var app = require('express')();
+var port = 4000;
+app.listen(port, function(){
+  console.log('API listening on *:' + port);
 });
-const users = new Map(); //儲存 Socket id 對應到的使用者名稱
-
-//Step2:設定伺服器路由
-app.use(express.static('./'));
-
-server.listen(3001, function () {
-    console.log('Express https server listening on port 3001');
-});
-
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
 
 
-//Step3:設定Socket Server的監聽事件
-io.on('connection', (socket) => { //Client連線至Socket Server後，進入此監聽事件
-    console.log(`${socket.id} connected`);
+var messages = [];
 
-    socket.on('join', (name) => { //Client發送join事件後，進入此監聽事件
-        users.set(socket.id, name); //儲存Socket id與使用者名稱
-        io.emit('new member', name); //向所有人發送new member事件，以傳遞新成員通知
-    });
+//用api方式取得
+app.get('/api/messages',function(req,res){
+  res.send(messages);
+})
 
-    socket.on('message', (name, msg) => { //Client發送message事件後，進入此監聽事件
-        io.emit('new message', name, msg); //向所有人發送new message事件，以傳遞新訊息
-    });
+io.on('connection', function(socket){
+  //初始化...
+  console.log("A user connected.");
+  io.emit("allMessage",messages);
 
-    socket.on('disconnect', () => { //Client與Socket Server斷線後，進入此監聽事件
-        console.log(`${socket.id} disconnected`);
-
-        const name = users.get(socket.id); //取得Socket id對應的使用者名稱
-        io.emit('member leave', name); //向所有人發送member leave事件，以傳遞成員離開通知
-    });
-});
+  socket.on('sendMessage',function(obj){
+    //get all message!
+    messages.push(obj);
+    console.log( obj.message + " - " + obj.name )
+    io.emit('newMessage', obj);
+  })
+})
