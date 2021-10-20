@@ -2,7 +2,7 @@ let userName = ""; //用於儲存使用者名稱
 
 //設定Socket連線的配置，配置內容為連線至本地端的port:3001，並關閉自動連線
 const socket = io(
-    'https://shangyuanhsu.github.io/chat-example/index.html:3001', { 'autoConnect': false }
+    'https://shangyuanhsu.github.io/chat-example/:3001', { 'autoConnect': false }
 );
 
 function init() {
