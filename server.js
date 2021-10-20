@@ -2,17 +2,21 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+    cors: {
+        origin: "*"
+    }
+});
 const users = new Map(); //儲存 Socket id 對應到的使用者名稱
 
 //Step2:設定伺服器路由
 app.use(express.static('./'));
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-server.listen(3001, function() {
+server.listen(3001, function () {
     console.log('Express https server listening on port 3001');
 });
 
