@@ -10,10 +10,14 @@ socket.on("connect_error", (err) => {
 });
 
 
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/socket.io/socket.io.js', (req, res) => {
+    res.sendFile(__dirname + '/socket.io/socket.io.js');
+});
 
 
 io.on('connection', (socket) => {
