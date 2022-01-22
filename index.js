@@ -3,9 +3,9 @@ const http = require('http').Server(app);
 // const io = require('socket.io')(http);
 const io = require("socket.io")(http, {
     cors: {
-      origin: "*"
+        origin: "*"
     }
-  });
+});
 const port = process.env.PORT || 3000;
 
 
@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
     });
 });
 
-http.listen("port", () => {
+http.listen(port, () => {
     console.log(`listening on *:${port}`);
 });
 
